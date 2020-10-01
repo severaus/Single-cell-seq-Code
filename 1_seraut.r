@@ -1,4 +1,4 @@
-setwd("/yhgao/rumen/")
+setwd("/lwl/rumen/")
 
 library(dplyr)
 library(Seurat)
@@ -7,14 +7,14 @@ library(cowplot)
 library(ggplot2)
 
 # Setup the Seurat objects
-BW.data <- Read10X(data.dir = "/yhgao/rumen/BW/")
+BW.data <- Read10X(data.dir = "/lwl/rumen/BW/")
 BW <- CreateSeuratObject(counts = BW.data, project = "BW", min.cells = 3, min.features = 200)
 BW[["percent.mt"]] <- PercentageFeatureSet(BW, pattern = "^MT-")
 BW <- subset(BW, subset = nFeature_RNA > 200 & nFeature_RNA < 8000 & percent.mt < 30)
 BW <- NormalizeData(BW, normalization.method = "LogNormalize", scale.factor = 10000)
 BW <- FindVariableFeatures(BW, selection.method = "vst", nfeatures = 2000)
 
-AW.data <- Read10X(data.dir = "/yhgao/rumen/AW")
+AW.data <- Read10X(data.dir = "/lwl/rumen/AW")
 AW <- CreateSeuratObject(counts = AW.data, project = "AW", min.cells = 3, min.features = 200)
 AW[["percent.mt"]] <- PercentageFeatureSet(AW, pattern = "^MT-")
 AW <- subset(AW, subset = nFeature_RNA > 200 & nFeature_RNA < 8000 & percent.mt < 30)
